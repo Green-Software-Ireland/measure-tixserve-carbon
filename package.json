@@ -1,0 +1,16 @@
+{
+  "name": "measure-tixserve-carbon",
+  "version": "0.0.1",
+  "description": "A tool to measure the energy and carbon cost of running Tixserve's services",
+  "main": "app.mjs",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "John Behan <johnbehan@tixserve.com>",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@grnsft/if": "^0.3.2",
+    "@grnsft/if-plugins": "^0.3.2",
+    "@grnsft/if-unofficial-plugins": "^0.3.1"
+  }
+}

@@ -1,0 +1,49 @@
+name: test-carbon-calc
+description: Test to demo incorrect calculation of carbon
+tags: null
+aggregation:
+  metrics:
+    - "carbon"
+    - "energy"
+  type: "both"
+initialize:
+  plugins:
+    teads-aws:
+      path: "@grnsft/if-unofficial-plugins"
+      method: TeadsAWS
+      global-config:
+        interpolation: linear
+    sci-o:
+      path: "@grnsft/if-plugins"
+      method: SciO
+    sum:
+      method: Sum
+      path: "@grnsft/if-plugins"
+      global-config:
+        input-parameters: ["carbon-operational", "carbon-embodied"]
+        output-parameter: "carbon"
+    divide:
+      method: Divide
+      path: "@grnsft/if-plugins"
+      global-config:
+        numerator: carbon
+        denominator: ticket-journeys
+        output: sci
+  outputs:
+    - yaml
+if-version: v0.3.2
+tree:
+  children:
+    child:
+      pipeline:
+        - teads-aws
+        - sci-o
+        - sci
+      defaults:
+        cloud/instance-type: m5.xlarge
+        grid/carbon-intensity: 118.5
+        ticket-journeys: 446.9
+      inputs:
+        - timestamp: 2024-05-21T09:57:00.000Z
+          duration: 60
+          cpu/utilization: 9.595
